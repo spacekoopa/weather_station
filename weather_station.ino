@@ -38,14 +38,17 @@ void loop() {
   Serial.println("Humidity:     " + (String)humidity + " % ");
   Serial.println("Dew Point:    " + (String)dewPoint + " °C ");
   Serial.println("Wet Bulb:     " + (String)wetBulb + " °C ");
-
   Serial.println();
 
   display.setTextSize(1);
   display.setTextColor(WHITE);
   display.setCursor(0, 0);
-  display.println("Hello");
-  display.println("World");
+
+  display.println("Temperature:  " + (String)temperatureC + " °C ");
+  display.println("Temperature:  " + (String)temperatureF + " F ");
+  display.println("Humidity:     " + (String)humidity + " % ");
+  display.println("Dew Point:    " + (String)dewPoint + " °C ");
+  display.println("Wet Bulb:     " + (String)wetBulb + " °C ");
   display.display();
 
   delay(interval);
