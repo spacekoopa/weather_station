@@ -1,11 +1,20 @@
 #include <DHT.h>
+#include <Adafruit_SSD1306.h>
+
 
 #define DHT_TYPE DHT22
-#define DHT_PIN D1
+#define DHT_PIN D3
+
+#define OLED_SCL GPIO5
+#define OLED_SDA GPIO4
+#define OLED_RESET 0
+
 
 DHT dht(DHT_PIN, DHT_TYPE);
+Adafruit_SSD1306 display(128, 64);
 
 const long interval = 2000;
+
 
 void setup() {
   dht.begin();
@@ -14,6 +23,7 @@ void setup() {
   delay(500);
   Serial.println("\nDHT running...\n");
 }
+
 
 void loop() {
   float temperatureC = dht.readTemperature();
