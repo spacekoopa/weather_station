@@ -6,10 +6,11 @@
 #include "index_html.h"
 #include "wlan_info.h"
 
-
+// config for DHT
 #define DHT_TYPE DHT22
 #define DHT_PIN D3
 
+// config for OLED
 #define OLED_SCL GPIO5
 #define OLED_SDA GPIO4
 #define OLED_RESET 0
@@ -25,7 +26,6 @@ void setup() {
   dht.begin();
 
   Serial.begin(115200);
-  delay(500);
   Serial.println("\nDHT running...\n");
 }
 
