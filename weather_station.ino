@@ -1,6 +1,6 @@
 #include <DHT.h>
 
-#define DHT_TYPE DHT11
+#define DHT_TYPE DHT22
 #define DHT_PIN D1
 
 DHT dht(DHT_PIN, DHT_TYPE);
@@ -16,8 +16,8 @@ void setup() {
 }
 
 void loop() {
-  float temperatureC = dht.readTemperature(true);
-  float temperatureF = dht.readTemperature();
+  float temperatureC = dht.readTemperature();
+  float temperatureF = dht.readTemperature(true);
   float humidity = dht.readHumidity();
   
   float dewPoint = temperatureC - ((100 - humidity) / 5);
