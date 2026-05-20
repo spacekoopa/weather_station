@@ -19,10 +19,17 @@ void loop() {
   float temperatureC = dht.readTemperature(true);
   float temperatureF = dht.readTemperature();
   float humidity = dht.readHumidity();
+  
+  float dewPoint = temperatureC - ((100 - humidity) / 5);
+  float wetBulb = temperatureC * atan(0.151977 * sqrt(humidity + 8.313659)) + atan(temperatureC + humidity) - atan(humidity - 1.676331) + 0.00391838 * sqrt(pow(humidity, 3)) * atan(0.023101 * humidity) - 4.686035;
 
-  Serial.println("Temperatur:       " + (String)temperatureC + " °C ");
-  Serial.println("Temperatur:       " + (String)temperatureF + " F ");
-  Serial.println("Luftfeuchtigkeit: " + (String)humidity + " % ");
+  Serial.println("Temperature:  " + (String)temperatureC + " °C ");
+  Serial.println("Temperature:  " + (String)temperatureF + " F ");
+  Serial.println("Humidity:     " + (String)humidity + " % ");
+  Serial.println("Dew Point:    " + (String)dewPoint + " °C ");
+  Serial.println("Wet Bulb:     " + (String)wetBulb + " °C ");
+
+  Serial.println();
 
   delay(interval);
 }
