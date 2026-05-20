@@ -6,6 +6,15 @@
 #include "index_html.h"
 #include "wlan_info.h"
 
+
+#define AP_MODE                     // comment for station mode
+
+const char* ssid = wlan_ssid;        // WIFI SSID for station mode
+const char* psk  = wlan_psk;    // WIFI PSK
+
+const char* ap_ssid = wlan_ap_ssid;  // WIFI SSID for AP mode
+const char* ap_psk  = wlan_ap_psk; // WIFI PSK
+
 // config for DHT
 #define DHT_TYPE DHT22
 #define DHT_PIN D3
@@ -27,10 +36,46 @@ void setup() {
 
   Serial.begin(115200);
   Serial.println("\nDHT running...\n");
+
+
+  #ifdef AP_MODE
+    WiFi.mode(WIFI_AP);      // access point mode
+    WiFi.softAP(ap_ssid, ap_psk);
+    delay(500);           
+    Serial.print("IP address ");  // server IP Address
+    Serial.println(WiFi.softAPIP());
+  #endif
+
+  #ifndef AP_MODE
+    WiFi.mode(WIFI_STA);
+    WiFi.begin(ssid, psk);
+    // wait for AP association
+    Serial.println("Waiting for association...");
+    while (WiFi.status() != WL_CONNECTED)
+    {
+      delay(500);
+      Serial.print(".");
+    }
+    Serial.println("");
+    Serial.print("Associated with ");
+    Serial.println(ssid);
+    Serial.print("IP address: ");
+    Serial.println(WiFi.localIP());
+  #endif
+
+  // set event handler
+  server.on("/", process_Index);
+  server.onNotFound(handleNotFound);
+ 
+  server.begin();       // start server
+  Serial.println("HTTP Server started");
 }
 
 
 void loop() {
+  server.handleClient();
+
+
   float temperatureC = dht.readTemperature();
   float temperatureF = dht.readTemperature(true);
   float humidity = dht.readHumidity();
@@ -57,4 +102,15 @@ void loop() {
   display.display();
 
   delay(interval);
+}
+
+void process_Index() {
+  Serial.println("send index.html");
+  server.send(200, "text/html", indexHTML); 
+}
+
+
+void handleNotFound()
+{
+  server.send(404, "text/plain", "404: Not found");    // send HTTP status 404 (Not Found)
 }
