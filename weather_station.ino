@@ -41,5 +41,12 @@ void loop() {
 
   Serial.println();
 
+  display.setTextSize(1);
+  display.setTextColor(WHITE);
+  display.setCursor(0, 0);
+  display.println("Hello");
+  display.println("World");
+  display.display();
+
   delay(interval);
 }
