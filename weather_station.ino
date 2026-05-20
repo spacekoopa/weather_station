@@ -1,5 +1,10 @@
+#include <ESP8266WiFi.h>
+#include <ESP8266WebServer.h>
 #include <DHT.h>
 #include <Adafruit_SSD1306.h>
+
+#include "index_html.h"
+#include "wlan_info.h"
 
 
 #define DHT_TYPE DHT22
