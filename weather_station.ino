@@ -1,3 +1,19 @@
+/*
+Necessary Libraries:
+
+Adafruit SSD1306
+DHT sensor library
+Adafruit Unified Sensor
++ the dependencies of these libraries
+
+*/
+
+
+#include <DHT.h>
+#include <DHT_U.h>
+
+#include <Adafruit_Sensor.h>
+
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
 #include <DHT.h>
