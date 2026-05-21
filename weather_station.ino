@@ -66,8 +66,6 @@ void setup() {
   display.setTextSize(1);
   display.setTextColor(WHITE);
   display.setCursor(0, 0);
-  display.println("2nd Test");
-  display.display();
 
 
   /*
@@ -124,6 +122,7 @@ void loop() {
   Serial.println("Humidity:     " + (String)humidity + " % ");
   Serial.println("Dew Point:    " + (String)dewPoint + " °C ");
   Serial.println("Wet Bulb:     " + (String)wetBulb + " °C ");
+  Serial.print("Light:        ");
   if (light < 1024)
   {
     Serial.print(light);
