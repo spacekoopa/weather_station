@@ -66,7 +66,7 @@ void setup() {
   display.setTextSize(1);
   display.setTextColor(WHITE);
   display.setCursor(0, 0);
-  display.println("Test");
+  display.println("2nd Test");
   display.display();
 
 
@@ -136,18 +136,26 @@ void loop() {
   Serial.println();
   Serial.println();
 
-  /*
+  
   display.setTextSize(1);
   display.setTextColor(WHITE);
   display.setCursor(0, 0);
 
-  display.println("Temperature:  " + (String)temperatureC + " °C ");
-  display.println("Temperature:  " + (String)temperatureF + " F ");
-  display.println("Humidity:     " + (String)humidity + " % ");
-  display.println("Dew Point:    " + (String)dewPoint + " °C ");
-  display.println("Wet Bulb:     " + (String)wetBulb + " °C ");
+  display.clearDisplay();
+
+  display.println("Temperature: " + (String)temperatureC + " C");
   display.display();
-  */
+  display.println("Temperature: " + (String)temperatureF + " F");
+  display.display();
+  display.println("Humidity:    " + (String)humidity + " %");
+  display.display();
+  display.println("Dew Point:   " + (String)dewPoint + " C");
+  display.display();
+  display.println("Wet Bulb:    " + (String)wetBulb + " C");
+  display.display();
+  display.println("Light:       " + (String)light);
+  display.display();
+  
 
   delay(interval);
 }
