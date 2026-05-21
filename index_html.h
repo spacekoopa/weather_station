@@ -2,7 +2,7 @@ const char indexHTML[] PROGMEM = R"=====(
 <!DOCTYPE html>
 <html>
  <head>
-  <title>Wheather Station</title>
+  <title>Weather Station</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name=viewport content="width=device-width, initial-scale=1">
 
@@ -20,7 +20,7 @@ const char indexHTML[] PROGMEM = R"=====(
  
 </head>
 
- <body>
+<body>
 
 </body>
 </html>

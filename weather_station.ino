@@ -114,8 +114,14 @@ void loop() {
   int light = analogRead(LDR);
 
   Serial.print("IP address: ");
-  Serial.println(WiFi.softAPIP());
+  #ifdef AP_MODE
+    Serial.println(WiFi.softAPIP());
+  #endif
+  #ifndef AP_MODE
+    Serial.println(WiFi.localIP());
+  #endif
   Serial.println();
+
   Serial.println("Temperature:  " + (String)temperatureC + " °C ");
   Serial.println("Temperature:  " + (String)temperatureF + " F ");
   Serial.println("Humidity:     " + (String)humidity + " % ");
