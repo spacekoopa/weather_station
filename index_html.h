@@ -27,8 +27,11 @@ function update_state()
  
 function readAjax()                               // AJAX-event handler
 {
+  console.log("function readAjax");
   if (myAjax.status==200)                         // HTTP-status OK
   {
+
+    console.log("Ajax.status == 200 Ok");
 
  /*
     Expected JSON-Object of data:
@@ -43,6 +46,11 @@ function readAjax()                               // AJAX-event handler
     */
 
     let data = JSON.parse(myAjax.responseText);                 // LED state from response body; parse JSON to JS-Object
+
+    let paragraph = document.getElementById(test);
+    paragraph.innerText = data;
+
+    console.log(data);
   }
 }
  
@@ -63,6 +71,8 @@ function httpGet(parameter)            // GET request
 </head>
 
 <body>
+
+<p id="test">Hier ist ein paragraph</p>
 
 </body>
 </html>
