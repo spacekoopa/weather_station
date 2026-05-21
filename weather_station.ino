@@ -23,6 +23,7 @@ Adafruit Unified Sensor
 #include "wlan_info.h"
 
 
+// config for web interface
 #define AP_MODE                     // comment for station mode
 
 const char* ssid = wlan_ssid;        // WIFI SSID for station mode
@@ -30,6 +31,8 @@ const char* psk  = wlan_psk;    // WIFI PSK
 
 const char* ap_ssid = wlan_ap_ssid;  // WIFI SSID for AP mode
 const char* ap_psk  = wlan_ap_psk; // WIFI PSK
+
+ESP8266WebServer server(80);        // server port
 
 // config for DHT
 #define DHT_TYPE DHT22
@@ -63,7 +66,6 @@ void setup() {
   display.clearDisplay();
 
 
-  /*
   #ifdef AP_MODE
     WiFi.mode(WIFI_AP);      // access point mode
     WiFi.softAP(ap_ssid, ap_psk);
@@ -95,12 +97,11 @@ void setup() {
  
   server.begin();       // start server
   Serial.println("HTTP Server started");
-  */
 }
 
 
 void loop() {
-  // server.handleClient();
+  server.handleClient();
 
 
   float temperatureC = dht.readTemperature();
@@ -112,6 +113,9 @@ void loop() {
 
   int light = analogRead(LDR);
 
+  Serial.print("IP address: ");
+  Serial.println(WiFi.softAPIP());
+  Serial.println();
   Serial.println("Temperature:  " + (String)temperatureC + " °C ");
   Serial.println("Temperature:  " + (String)temperatureF + " F ");
   Serial.println("Humidity:     " + (String)humidity + " % ");
@@ -127,6 +131,7 @@ void loop() {
     Serial.print("Overflow");
   }
 
+  Serial.println();
   Serial.println();
   Serial.println();
 
@@ -151,7 +156,7 @@ void loop() {
   delay(interval);
 }
 
-/*
+
 void process_Index() {
   Serial.println("send index.html");
   server.send(200, "text/html", indexHTML); 
@@ -162,4 +167,3 @@ void handleNotFound()
 {
   server.send(404, "text/plain", "404: Not found");    // send HTTP status 404 (Not Found)
 }
-*/
