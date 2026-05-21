@@ -24,6 +24,9 @@ const char* ap_psk  = wlan_ap_psk; // WIFI PSK
 #define OLED_SDA GPIO4
 #define OLED_RESET 0
 
+// config for LDR
+#define LDR A0
+
 
 DHT dht(DHT_PIN, DHT_TYPE);
 Adafruit_SSD1306 display(128, 64);
@@ -32,12 +35,26 @@ const long interval = 2000;
 
 
 void setup() {
+  // Setup DHT
   dht.begin();
 
+  // Setup Serial Monitor
   Serial.begin(115200);
   Serial.println("\nDHT running...\n");
 
+  // Setup OLED
+  display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
+  display.clearDisplay();
 
+
+  display.setTextSize(1);
+  display.setTextColor(WHITE);
+  display.setCursor(0, 0);
+  display.println("Test");
+  display.display();
+
+
+  /*
   #ifdef AP_MODE
     WiFi.mode(WIFI_AP);      // access point mode
     WiFi.softAP(ap_ssid, ap_psk);
@@ -69,11 +86,12 @@ void setup() {
  
   server.begin();       // start server
   Serial.println("HTTP Server started");
+  */
 }
 
 
 void loop() {
-  server.handleClient();
+  // server.handleClient();
 
 
   float temperatureC = dht.readTemperature();
@@ -83,13 +101,26 @@ void loop() {
   float dewPoint = temperatureC - ((100 - humidity) / 5);
   float wetBulb = temperatureC * atan(0.151977 * sqrt(humidity + 8.313659)) + atan(temperatureC + humidity) - atan(humidity - 1.676331) + 0.00391838 * sqrt(pow(humidity, 3)) * atan(0.023101 * humidity) - 4.686035;
 
+  int light = analogRead(LDR);
+
   Serial.println("Temperature:  " + (String)temperatureC + " °C ");
   Serial.println("Temperature:  " + (String)temperatureF + " F ");
   Serial.println("Humidity:     " + (String)humidity + " % ");
   Serial.println("Dew Point:    " + (String)dewPoint + " °C ");
   Serial.println("Wet Bulb:     " + (String)wetBulb + " °C ");
+  if (light < 1024)
+  {
+    Serial.print(light);
+  }
+  else
+  {
+    Serial.print("Overflow");
+  }
+
+  Serial.println();
   Serial.println();
 
+  /*
   display.setTextSize(1);
   display.setTextColor(WHITE);
   display.setCursor(0, 0);
@@ -100,10 +131,12 @@ void loop() {
   display.println("Dew Point:    " + (String)dewPoint + " °C ");
   display.println("Wet Bulb:     " + (String)wetBulb + " °C ");
   display.display();
+  */
 
   delay(interval);
 }
 
+/*
 void process_Index() {
   Serial.println("send index.html");
   server.send(200, "text/html", indexHTML); 
@@ -114,3 +147,4 @@ void handleNotFound()
 {
   server.send(404, "text/plain", "404: Not found");    // send HTTP status 404 (Not Found)
 }
+*/
