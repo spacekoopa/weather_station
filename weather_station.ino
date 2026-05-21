@@ -138,15 +138,10 @@ void loop() {
   display.clearDisplay();
 
   display.println("Temperature: " + (String)temperatureC + " C");
-  display.display();
   display.println("Temperature: " + (String)temperatureF + " F");
-  display.display();
   display.println("Humidity:    " + (String)humidity + " %");
-  display.display();
   display.println("Dew Point:   " + (String)dewPoint + " C");
-  display.display();
   display.println("Wet Bulb:    " + (String)wetBulb + " C");
-  display.display();
   display.println("Light:       " + (String)light);
   display.display();
   
