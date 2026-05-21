@@ -137,12 +137,14 @@ void loop() {
 
   display.clearDisplay();
 
+  display.println(" ~ Current Weather ~");
   display.println("Temperature: " + (String)temperatureC + " C");
   display.println("Temperature: " + (String)temperatureF + " F");
   display.println("Humidity:    " + (String)humidity + " %");
   display.println("Dew Point:   " + (String)dewPoint + " C");
   display.println("Wet Bulb:    " + (String)wetBulb + " C");
   display.println("Light:       " + (String)light);
+  display.println(" Have a nice day :3");
   display.display();
   
 
