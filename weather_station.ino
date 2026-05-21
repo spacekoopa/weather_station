@@ -103,7 +103,7 @@ void setup() {
 void loop() {
   server.handleClient();
 
-
+  // get data
   float temperatureC = dht.readTemperature();
   float temperatureF = dht.readTemperature(true);
   float humidity = dht.readHumidity();
@@ -113,6 +113,20 @@ void loop() {
 
   int light = analogRead(LDR);
 
+
+  // data to website
+  String jsonData = "{\"temperatureC\":" + (String) temperatureC + "," +
+                     "\"temperatureF\":" + (String) temperatureF + "," +
+                     "\"humidity\":" + (String) humidity + "," +
+                     "\"dewPoint\":" + (String) dewPoint + "," +
+                     "\"wetBulb\":" + (String) wetBulb + "," +
+                     "\"light\":" + (String) light + "}";
+
+  server.sendHeader("Cache-Control", "no-cache");    // avoid browser-caching
+  server.send(200, "text/plain", jsonData);    // send data
+
+
+  // data to serial monitor
   Serial.print("IP address: ");
   #ifdef AP_MODE
     Serial.println(WiFi.softAPIP());
@@ -142,6 +156,7 @@ void loop() {
   Serial.println();
 
   
+  // data to oled
   display.setTextSize(1);
   display.setTextColor(WHITE);
   display.setCursor(0, 0);
