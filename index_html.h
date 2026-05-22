@@ -77,7 +77,54 @@ function displayData(data) {
 
 <style type="text/css" media="screen, print, projection">
 
+.container {
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+}
 
+.row::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+[class*="col-"] {
+  float: left;
+  min-height: 1px;
+  padding: .8rem;
+}
+
+
+/*
+Grid-system with 12 columns
+*/
+
+.col-1   { width: 8.333%;   }
+.col-3   { width: 25%;      }
+.col-4   { width: 33.333%;  }
+.col-6   { width: 50%;      }
+.col-12  { width: 100%      }
+
+@media (max-width: 1175px) {
+  .col-4 { width: 100%; }
+}
+
+@media (max-width: 768px) {
+  .col-3 { width: 50%;  }
+  .col-4 { width: 100%; }
+}
+
+@media (max-width: 480px) {
+  .col-3 { width: 100%; }
+  .col-4 { width: 100%; }
+
+  .contained {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
 
 </style>
  
