@@ -52,6 +52,8 @@ Adafruit_SSD1306 display(128, 64);
 
 const long interval = 2000;
 
+unsigned long lastUpdate = 0;
+
 
 // Global variables for sensor data
 float temperatureC;
@@ -61,7 +63,8 @@ float humidity;
 float dewPoint;
 float wetBulb;
 
-  
+int light;
+
 
 void setup() {
   // Setup DHT
@@ -114,58 +117,62 @@ void setup() {
 void loop() {
   server.handleClient();
 
-  // get data
-  readSensorData();
-
-  // data to serial monitor
-  Serial.print("IP address: ");
-  #ifdef AP_MODE
-    Serial.println(WiFi.softAPIP());
-  #endif
-  #ifndef AP_MODE
-    Serial.println(WiFi.localIP());
-  #endif
-  Serial.println();
-
-  Serial.println("Temperature:  " + (String)temperatureC + " °C ");
-  Serial.println("Temperature:  " + (String)temperatureF + " F ");
-  Serial.println("Humidity:     " + (String)humidity + " % ");
-  Serial.println("Dew Point:    " + (String)dewPoint + " °C ");
-  Serial.println("Wet Bulb:     " + (String)wetBulb + " °C ");
-  Serial.print("Light:        ");
-  if (light < 1024)
-  {
-    Serial.print(light);
-  }
-  else
-  {
-    Serial.print("Overflow");
-  }
-
-  Serial.println();
-  Serial.println();
-  Serial.println();
+  if ((millis() - lastUpdate >= interval)) {
+    
+    lastUpdate = millis();
 
   
-  // data to oled
-  display.setTextSize(1);
-  display.setTextColor(WHITE);
-  display.setCursor(0, 0);
+    // get data
+    readSensorData();
 
-  display.clearDisplay();
+    // data to serial monitor
+    Serial.print("IP address: ");
+    #ifdef AP_MODE
+      Serial.println(WiFi.softAPIP());
+    #endif
+    #ifndef AP_MODE
+      Serial.println(WiFi.localIP());
+    #endif
+    Serial.println();
 
-  display.println(" ~ Current Weather ~");
-  display.println("Temperature: " + (String)temperatureC + " C");
-  display.println("Temperature: " + (String)temperatureF + " F");
-  display.println("Humidity:    " + (String)humidity + " %");
-  display.println("Dew Point:   " + (String)dewPoint + " C");
-  display.println("Wet Bulb:    " + (String)wetBulb + " C");
-  display.println("Light:       " + (String)light);
-  display.println(" Have a nice day :3");
-  display.display();
+    Serial.println("Temperature:  " + (String)temperatureC + " °C ");
+    Serial.println("Temperature:  " + (String)temperatureF + " F ");
+    Serial.println("Humidity:     " + (String)humidity + " % ");
+    Serial.println("Dew Point:    " + (String)dewPoint + " °C ");
+    Serial.println("Wet Bulb:     " + (String)wetBulb + " °C ");
+    Serial.print("Light:        ");
+    if (light < 1024)
+    {
+      Serial.print(light);
+    }
+    else
+    {
+      Serial.print("Overflow");
+    }
+
+    Serial.println();
+    Serial.println();
+    Serial.println();
+
+    
+    // data to oled
+    display.setTextSize(1);
+    display.setTextColor(WHITE);
+    display.setCursor(0, 0);
+
+    display.clearDisplay();
+
+    display.println(" ~ Current Weather ~");
+    display.println("Temperature: " + (String)temperatureC + " C");
+    display.println("Temperature: " + (String)temperatureF + " F");
+    display.println("Humidity:    " + (String)humidity + " %");
+    display.println("Dew Point:   " + (String)dewPoint + " C");
+    display.println("Wet Bulb:    " + (String)wetBulb + " C");
+    display.println("Light:       " + (String)light);
+    display.println(" Have a nice day :3");
+    display.display();
   
-
-  delay(interval);
+  }
 }
 
 

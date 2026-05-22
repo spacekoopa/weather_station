@@ -16,7 +16,7 @@ function start()
   myAjax = new XMLHttpRequest();       // new AJAX object
   myAjax.onload=readAjax;              // on server response call readAjax
   setInterval(update_state, 2000);     // set timer for update_state()
-  update_state();                      // get initital LED state on page load
+  update_state();                     
 }
  
 function update_state() 
