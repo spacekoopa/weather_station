@@ -36,21 +36,18 @@ function readAjax()                               // AJAX-event handler
  /*
     Expected JSON-Object of data:
     {
-      "temperatureC": String,
-      "temperatureF": String,
-      "humidity":     String,
-      "dewPoint":     String,
-      "wetBulb":      String,
-      "light":        String 
+      "temperatureC": number,
+      "temperatureF": number,
+      "humidity":     number,
+      "dewPoint":     number,
+      "wetBulb":      number,
+      "light":        number 
     }
     */
 
     let data = JSON.parse(myAjax.responseText);                 // LED state from response body; parse JSON to JS-Object
 
-    let paragraph = document.getElementById("test");
-    paragraph.innerText = data;
-
-    console.log(data);
+    displayData(data);
   }
 }
  
@@ -58,6 +55,17 @@ function httpGet(parameter)            // GET request
 {
   myAjax.open ("GET", url + parameter, true);
   myAjax.send();
+}
+
+function displayData(data) {
+  // display the data on screen
+
+  console.log(data);
+
+  let paragraph = document.getElementById("test");
+  paragraph.innerText = data;
+
+
 }
 
 </script>

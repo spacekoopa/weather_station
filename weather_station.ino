@@ -118,7 +118,7 @@ void loop() {
   server.handleClient();
 
   if ((millis() - lastUpdate >= interval)) {
-    
+
     lastUpdate = millis();
 
   
@@ -163,12 +163,12 @@ void loop() {
     display.clearDisplay();
 
     display.println(" ~ Current Weather ~");
-    display.println("Temperature: " + (String)temperatureC + " C");
-    display.println("Temperature: " + (String)temperatureF + " F");
-    display.println("Humidity:    " + (String)humidity + " %");
-    display.println("Dew Point:   " + (String)dewPoint + " C");
-    display.println("Wet Bulb:    " + (String)wetBulb + " C");
-    display.println("Light:       " + (String)light);
+    display.println("Temperature: " + String(temperatureC, 2) + " C");
+    display.println("Temperature: " + String(temperatureF, 2) + " F");
+    display.println("Humidity:    " + String(humidity, 2) + " %");
+    display.println("Dew Point:   " + String(dewPoint, 2) + " C");
+    display.println("Wet Bulb:    " + String(wetBulb, 2) + " C");
+    display.println("Light:       " + String(light, 0);
     display.println(" Have a nice day :3");
     display.display();
   
