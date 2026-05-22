@@ -163,13 +163,25 @@ void loop() {
     display.clearDisplay();
 
     display.println(" ~ Current Weather ~");
+
     display.println("Temperature: " + (String)temperatureC + " C");
-    display.println("Temperature: " + (String)temperatureF + " F");
+    int tempWidth = (int)(((temperatureC - (-5)) / (40 - (-5))) * 128);
+    tempWidth = min(128, max(0, tempWidth));
+    display.fillRect(0, 16, tempWidth, 6, WHITE);
+
+    display.setCursor(0, 24);
     display.println("Humidity:    " + (String)humidity + " %");
-    display.println("Dew Point:   " + (String)dewPoint + " C");
-    display.println("Wet Bulb:    " + (String)wetBulb + " C");
+    int humWidth = (int)((humidity / 100.0) * 128);
+    display.fillRect(0, 32, humWidth, 6, WHITE);
+    
+    display.setCursor(0, 40);
     display.println("Light:       " + (String)light);
+    int lightWidth = (int)((light / 1024.0) * 128);
+    display.fillRect(0, 48, lightWidth, 6, WHITE);
+
+    display.setCursor(0, 56);
     display.println(" Have a nice day :3");
+
     display.display();
   
   }
