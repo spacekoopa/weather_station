@@ -27,7 +27,6 @@ function update_state()
  
 function readAjax()                               // AJAX-event handler
 {
-  console.log("function readAjax");
   if (myAjax.status==200)                         // HTTP-status OK
   {
 
@@ -60,12 +59,18 @@ function httpGet(parameter)            // GET request
 function displayData(data) {
   // display the data on screen
 
+  console.log("Data received");
   console.log(data);
 
-  let paragraph = document.getElementById("test");
-  paragraph.innerText = data;
+  // get data from json
+  temperatureC = data.temperatureC;
+  temperatureF = data.temperatureF;
+  humidity = data.humidity;
 
+  dewPoint = data.dewPoint;
+  wetBulb = data.wetBulb;
 
+  light = data.light;
 }
 
 </script>

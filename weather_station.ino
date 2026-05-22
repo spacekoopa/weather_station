@@ -163,12 +163,12 @@ void loop() {
     display.clearDisplay();
 
     display.println(" ~ Current Weather ~");
-    display.println("Temperature: " + String(temperatureC, 2) + " C");
-    display.println("Temperature: " + String(temperatureF, 2) + " F");
-    display.println("Humidity:    " + String(humidity, 2) + " %");
-    display.println("Dew Point:   " + String(dewPoint, 2) + " C");
-    display.println("Wet Bulb:    " + String(wetBulb, 2) + " C");
-    display.println("Light:       " + String(light, 0);
+    display.println("Temperature: " + (String)temperatureC + " C");
+    display.println("Temperature: " + (String)temperatureF + " F");
+    display.println("Humidity:    " + (String)humidity + " %");
+    display.println("Dew Point:   " + (String)dewPoint + " C");
+    display.println("Wet Bulb:    " + (String)wetBulb + " C");
+    display.println("Light:       " + (String)light);
     display.println(" Have a nice day :3");
     display.display();
   
@@ -196,12 +196,12 @@ void process_Index() {
 
 void process_Data() {
   // create JSON
-  String jsonData = "{\"temperatureC\":" + (String) temperatureC + "," +
-                     "\"temperatureF\":" + (String) temperatureF + "," +
-                     "\"humidity\":" + (String) humidity + "," +
-                     "\"dewPoint\":" + (String) dewPoint + "," +
-                     "\"wetBulb\":" + (String) wetBulb + "," +
-                     "\"light\":" + (String) light + "}";
+  String jsonData = "{\"temperatureC\":" + String(temperatureC, 2) + "," +
+                     "\"temperatureF\":" + String(temperatureF, 2) + "," +
+                     "\"humidity\":" + String(humidity, 2) + "," +
+                     "\"dewPoint\":" + String(dewPoint, 2) + "," +
+                     "\"wetBulb\":" + String(wetBulb, 2) + "," +
+                     "\"light\":" + String(light) + "}";
   
   // data to website
   server.sendHeader("Cache-Control", "no-cache");
