@@ -53,6 +53,16 @@ Adafruit_SSD1306 display(128, 64);
 const long interval = 2000;
 
 
+// Global variables for sensor data
+float temperatureC;
+float temperatureF;
+float humidity;
+  
+float dewPoint;
+float wetBulb;
+
+  
+
 void setup() {
   // Setup DHT
   dht.begin();
@@ -93,6 +103,7 @@ void setup() {
 
   // set event handler
   server.on("/", process_Index);
+  server.on("/data", process_Data);
   server.onNotFound(handleNotFound);
  
   server.begin();       // start server
@@ -104,27 +115,7 @@ void loop() {
   server.handleClient();
 
   // get data
-  float temperatureC = dht.readTemperature();
-  float temperatureF = dht.readTemperature(true);
-  float humidity = dht.readHumidity();
-  
-  float dewPoint = temperatureC - ((100 - humidity) / 5);
-  float wetBulb = temperatureC * atan(0.151977 * sqrt(humidity + 8.313659)) + atan(temperatureC + humidity) - atan(humidity - 1.676331) + 0.00391838 * sqrt(pow(humidity, 3)) * atan(0.023101 * humidity) - 4.686035;
-
-  int light = analogRead(LDR);
-
-
-  // data to website
-  String jsonData = "{\"temperatureC\":" + (String) temperatureC + "," +
-                     "\"temperatureF\":" + (String) temperatureF + "," +
-                     "\"humidity\":" + (String) humidity + "," +
-                     "\"dewPoint\":" + (String) dewPoint + "," +
-                     "\"wetBulb\":" + (String) wetBulb + "," +
-                     "\"light\":" + (String) light + "}";
-
-  server.sendHeader("Cache-Control", "no-cache");    // avoid browser-caching
-  server.send(200, "text/plain", jsonData);    // send data
-
+  readSensorData();
 
   // data to serial monitor
   Serial.print("IP address: ");
@@ -178,9 +169,36 @@ void loop() {
 }
 
 
+void readSensorData() {
+  temperatureC = dht.readTemperature();
+  temperatureF = dht.readTemperature(true);
+  humidity = dht.readHumidity();
+  
+  dewPoint = temperatureC - ((100 - humidity) / 5);
+  wetBulb = temperatureC * atan(0.151977 * sqrt(humidity + 8.313659)) + atan(temperatureC + humidity) - atan(humidity - 1.676331) + 0.00391838 * sqrt(pow(humidity, 3)) * atan(0.023101 * humidity) - 4.686035;
+
+  light = analogRead(LDR);
+}
+
+
 void process_Index() {
   Serial.println("send index.html");
   server.send(200, "text/html", indexHTML); 
+}
+
+
+void process_Data() {
+  // create JSON
+  String jsonData = "{\"temperatureC\":" + (String) temperatureC + "," +
+                     "\"temperatureF\":" + (String) temperatureF + "," +
+                     "\"humidity\":" + (String) humidity + "," +
+                     "\"dewPoint\":" + (String) dewPoint + "," +
+                     "\"wetBulb\":" + (String) wetBulb + "," +
+                     "\"light\":" + (String) light + "}";
+  
+  // data to website
+  server.sendHeader("Cache-Control", "no-cache");
+  server.send(200, "application/json", jsonData);
 }
 
 

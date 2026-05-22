@@ -15,13 +15,13 @@ function start()
 {
   myAjax = new XMLHttpRequest();       // new AJAX object
   myAjax.onload=readAjax;              // on server response call readAjax
-  setInterval(update_state, 1000);     // set timer for update_state()
+  setInterval(update_state, 2000);     // set timer for update_state()
   update_state();                      // get initital LED state on page load
 }
  
 function update_state() 
 {
-  myAjax.open("GET",url+"?state=r",true);  // ansynchronous GET-Request
+  myAjax.open("GET", "/data", true);  // ansynchronous GET-Request
   myAjax.send();  
 }
  
@@ -47,7 +47,7 @@ function readAjax()                               // AJAX-event handler
 
     let data = JSON.parse(myAjax.responseText);                 // LED state from response body; parse JSON to JS-Object
 
-    let paragraph = document.getElementById(test);
+    let paragraph = document.getElementById("test");
     paragraph.innerText = data;
 
     console.log(data);
