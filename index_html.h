@@ -111,12 +111,14 @@ function displayData(data) {
   let dewPointPercentage = ((dewPoint - (-5)) / (40 - (-5))) * 100;
   dewPointPercentage = Math.min(100, Math.max(0, dewPointPercentage));
 
+  let progressDewPoint = document.getElementById("progress-dewpoint");
   progressDewPoint.style["width"] = dewPointPercentage + "%";
 
 
   let wetBulbPercentage = ((wetBulb - (-5)) / (40 - (-5))) * 100;
   wetBulbPercentage = Math.min(100, Math.max(0, wetBulbPercentage));
 
+  let progressWetBulb = document.getElementById("progress-wetbulb");
   progressWetBulb.style["width"] = wetBulbPercentage + "%";
 
 
