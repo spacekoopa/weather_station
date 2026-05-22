@@ -77,6 +77,31 @@ function displayData(data) {
 
 <style type="text/css" media="screen, print, projection">
 
+body {
+  font-family: Arial, sans-serif;
+  background-color: #EBEBEB;
+}
+
+h1 {
+  font-size: 5rem;
+  text-align: center;
+}
+
+.card {
+  background-color: #FFF;
+  border: solid 1px #0F0F0F;
+  border-radius: 15px;
+  min-height: 6rem;
+  padding: 1rem;
+  margin: 1rem;
+  box-shadow: 0px 0px 10px 5px #424242;
+}
+
+
+/*
+Grid-system with 12 columns
+*/
+
 .container {
   width: 95%;
   margin-left: auto;
@@ -94,11 +119,6 @@ function displayData(data) {
   min-height: 1px;
   padding: .8rem;
 }
-
-
-/*
-Grid-system with 12 columns
-*/
 
 .col-1   { width: 8.333%;   }
 .col-3   { width: 25%;      }
@@ -132,7 +152,60 @@ Grid-system with 12 columns
 
 <body>
 
-<p id="test">Hier ist ein paragraph</p>
+<h1>Weather Station</h1>
+
+<div class="container">
+  <div class="row">
+
+    <div class="col-3">
+    <div class="card">
+      Temperature (Celsius)
+      <hr>
+
+    </div>
+    </div>
+    <div class="col-3">
+    <div class="card">
+      Temperature (Fahrenheit)
+      <hr>
+
+    </div>
+    </div>
+    <div class="col-3">
+    <div class="card">
+      Humidity
+      <hr>
+
+    </div>
+    </div>
+
+  </div>
+    <div class="row">
+
+    <div class="col-3">
+    <div class="card">
+      Dew Point
+      <hr>
+
+    </div>
+    </div>
+    <div class="col-3">
+    <div class="card">
+      Wet Bulb
+      <hr>
+
+    </div>
+    </div>
+    <div class="col-3">
+    <div class="card">
+      Light
+      <hr>
+
+    </div>
+    </div>
+
+  </div>
+</div>
 
 </body>
 </html>
