@@ -135,7 +135,7 @@ function displayData(data) {
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #EBEBEB;
+  background-color: #ABB5FC;
 }
 
 h1 {
@@ -165,7 +165,7 @@ h1 {
 
 .progressbar-inner {
   border-radius: 50px;
-  background-color: red;
+  background-color: #685EFF;
   height: 100%;
 }
 
