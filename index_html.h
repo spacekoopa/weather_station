@@ -71,6 +71,60 @@ function displayData(data) {
   wetBulb = data.wetBulb;
 
   light = data.light;
+
+
+  // display the data
+  // as text
+  let textTemperatureC = document.getElementById("text-temperaturec");
+  textTemperatureC.innerText = temperatureC + " °C";
+
+  let textTemperatureF = document.getElementById("text-temperaturef");
+  textTemperatureF.innerText = temperatureF + " °F";
+
+  let textHumidity = document.getElementById("text-humidity");
+  textHumidity.innerText = humidity + " %";
+
+  let textDewPoint = document.getElementById("text-dewpoint");
+  textDewPoint.innerText = dewPoint + " °C";
+
+  let textWetBulb = document.getElementById("text-wetbulb");
+  textWetBulb.innerText = wetBulb + " °C";
+
+  let textLight = document.getElementById("text-light");
+  textLight.innerText = light;
+
+  // graphically
+  let temperaturePercentage = ((temperatureC - (-5)) / (40 - (-5))) * 100;
+  temperaturePercentage = Math.min(100, Math.max(0, temperaturePercentage));
+
+  let progressTemperatureC = document.getElementById("progress-temperaturec");
+  progressTemperatureC.style["width"] = temperaturePercentage + "%";
+
+  let progressTemperatureF = document.getElementById("progress-temperaturef");
+  progressTemperatureF.style["width"] = temperaturePercentage + "%";
+
+
+  let progressHumidity = document.getElementById("progress-humidity");
+  progressHumidity.style["width"] = humidity + "%";
+
+
+  let dewPointPercentage = ((dewPoint - (-5)) / (40 - (-5))) * 100;
+  dewPointPercentage = Math.min(100, Math.max(0, dewPointPercentage));
+
+  progressDewPoint.style["width"] = dewPointPercentage + "%";
+
+
+  let wetBulbPercentage = ((wetBulb - (-5)) / (40 - (-5))) * 100;
+  wetBulbPercentage = Math.min(100, Math.max(0, wetBulbPercentage));
+
+  progressWetBulb.style["width"] = wetBulbPercentage + "%";
+
+
+  let lightPercentage = (light / 1024) * 100;
+
+  let progressLight = document.getElementById("progress-light");
+  progressLight.style["width"] = lightPercentage + "%";
+
 }
 
 </script>
@@ -87,6 +141,7 @@ h1 {
   text-align: center;
 }
 
+
 .card {
   background-color: #FFF;
   border: solid 1px #0F0F0F;
@@ -95,6 +150,21 @@ h1 {
   padding: 1rem;
   margin: 1rem;
   box-shadow: 0px 0px 10px 5px #424242;
+}
+
+
+.progressbar-border {
+  border-radius: 50px;
+  border: solid 1px #0F0F0F;
+  height: 1rem;
+  background-color: #EBEBEB;
+  width: 100%;
+}
+
+.progressbar-inner {
+  border-radius: 50px;
+  background-color: red;
+  height: 100%;
 }
 
 
@@ -159,22 +229,40 @@ Grid-system with 12 columns
 
     <div class="col-3">
     <div class="card">
+
       Temperature (Celsius)
       <hr>
+      <p id="text-temperaturec"></p>
+      <div class="progressbar-border">
+        <div id="progress-temperaturec" class="progressbar-inner">
+        </div>
+      </div>
 
     </div>
     </div>
     <div class="col-3">
     <div class="card">
+
       Temperature (Fahrenheit)
       <hr>
+      <p id="text-temperaturef"></p>
+      <div class="progressbar-border">
+        <div id="progress-temperaturef" class="progressbar-inner">
+        </div>
+      </div>
 
     </div>
     </div>
     <div class="col-3">
     <div class="card">
+
       Humidity
       <hr>
+      <p id="text-humidity"></p>
+      <div class="progressbar-border">
+        <div id="progress-humidity" class="progressbar-inner">
+        </div>
+      </div>
 
     </div>
     </div>
@@ -184,22 +272,40 @@ Grid-system with 12 columns
 
     <div class="col-3">
     <div class="card">
+
       Dew Point
       <hr>
+      <p id="text-dewpoint"></p>
+      <div class="progressbar-border">
+        <div id="progress-dewpoint" class="progressbar-inner">
+        </div>
+      </div>
 
     </div>
     </div>
     <div class="col-3">
     <div class="card">
+
       Wet Bulb
       <hr>
+      <p id="text-wetbulb"></p>
+      <div class="progressbar-border">
+        <div id="progress-wetbulb" class="progressbar-inner">
+        </div>
+      </div>
 
     </div>
     </div>
     <div class="col-3">
     <div class="card">
+
       Light
       <hr>
+      <p id="text-light"></p>
+      <div class="progressbar-border">
+        <div id="progress-light" class="progressbar-inner">
+        </div>
+      </div>
 
     </div>
     </div>
