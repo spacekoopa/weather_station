@@ -8,7 +8,7 @@ const char indexHTML[] PROGMEM = R"=====(
 
 <script>
 
-  var url = "/";     
+var url = "/";     
 window.onload = start;                 // initialize AJAX on page load
  
 function start() 
@@ -44,21 +44,14 @@ function readAjax()                               // AJAX-event handler
     }
     */
 
-    let data = JSON.parse(myAjax.responseText);                 // LED state from response body; parse JSON to JS-Object
+    let data = JSON.parse(myAjax.responseText);
 
     displayData(data);
   }
 }
  
-function httpGet(parameter)            // GET request 
-{
-  myAjax.open ("GET", url + parameter, true);
-  myAjax.send();
-}
 
 function displayData(data) {
-  // display the data on screen
-
   console.log("Data received");
   console.log(data);
 

@@ -50,8 +50,9 @@ ESP8266WebServer server(80);        // server port
 DHT dht(DHT_PIN, DHT_TYPE);
 Adafruit_SSD1306 display(128, 64);
 
-const long interval = 2000;
 
+// config for update interval
+const long interval = 2000;
 unsigned long lastUpdate = 0;
 
 
@@ -188,6 +189,7 @@ void loop() {
 }
 
 
+// reading sensor data and assigning it to global variables
 void readSensorData() {
   temperatureC = dht.readTemperature();
   temperatureF = dht.readTemperature(true);
@@ -215,7 +217,7 @@ void process_Data() {
                      "\"wetBulb\":" + String(wetBulb, 2) + "," +
                      "\"light\":" + String(light) + "}";
   
-  // data to website
+  // send data to website
   server.sendHeader("Cache-Control", "no-cache");
   server.send(200, "application/json", jsonData);
 }
