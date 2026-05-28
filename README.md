@@ -2,7 +2,7 @@
 
 Necessary Libraries:
 
--Adafruit SSD1306
+- Adafruit SSD1306
 - DHT sensor library
 - Adafruit Unified Sensor
 - \+ the dependencies of these libraries
