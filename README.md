@@ -7,9 +7,11 @@ Necessary Libraries:
 - Adafruit Unified Sensor
 - \+ the dependencies of these libraries
 
+Access through http (not https)
+
 Add file for WIFI Information:
 
-# wlan_info.h
+## wlan_info.h
 
 const char* wlan_ssid = "WIFI_NAME";
 
