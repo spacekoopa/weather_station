@@ -2,10 +2,10 @@
 
 Necessary Libraries:
 
-Adafruit SSD1306
-DHT sensor library
-Adafruit Unified Sensor
-+ the dependencies of these libraries
+-Adafruit SSD1306
+- DHT sensor library
+- Adafruit Unified Sensor
+- \+ the dependencies of these libraries
 
 Add file for WIFI Information:
 
