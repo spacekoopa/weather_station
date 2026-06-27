@@ -21,3 +21,9 @@ const char* wlan_psk  = "WIFI_PASSWORD";
 const char* wlan_ap_ssid = "ACCESS_POINT_NAME";
 
 const char* wlan_ap_psk  = "ACCESS_POINT_PASSWORD";
+
+# To-Do
+
+- ersetzen: zwischen Zahlenwert & Einheit schmales, geschütztes Leerzeichen (existiert in Unicode)
+- seperate html, css & js
+- improve frontend visuals
